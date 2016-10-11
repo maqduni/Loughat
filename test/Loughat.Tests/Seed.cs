@@ -24,11 +24,11 @@ namespace Loughat.Tests
             // ИХТИСОРАҲО
             var abbreviations = new List<Abbreviation>()
             {
-                new Abbreviation("а.", "арабӣ"),
+                new Abbreviation("а.", "арабӣ", true),
                 new Abbreviation("адш.", "адабиётшиносӣ"),
                 new Abbreviation("ак.", "аккадӣ"),
                 new Abbreviation("анат.", "анатомия"),
-                new Abbreviation("англ.", "англисӣ"),
+                new Abbreviation("англ.", "англисӣ", true), // 'engleesy'
                 new Abbreviation("асот.", "асотирӣ, асотиршиносӣ"),
                 new Abbreviation("афс.", "афсонавӣ"),
                 new Abbreviation("байт.", "байторӣ"),
@@ -51,8 +51,8 @@ namespace Loughat.Tests
                 new Abbreviation("зоол.", "зоология"),
                 new Abbreviation("ибр.", "ибрӣ"),
                 new Abbreviation("иқт.", "иқтисод"),
-                new Abbreviation("исп.", "испанӣ"),
-                new Abbreviation("ит.", "италиявӣ"),
+                new Abbreviation("исп.", "испанӣ", true),
+                new Abbreviation("ит.", "италиявӣ", true),
                 new Abbreviation("итт.", "иттилоотшиносӣ"),
                 new Abbreviation("кайҳ.", "кайҳоннавардӣ"),
                 new Abbreviation("кин.", "киноявӣ"),
@@ -60,10 +60,10 @@ namespace Loughat.Tests
                 new Abbreviation("кишов.", "кишоварзӣ"),
                 new Abbreviation("кҳн.", "кӯҳнашуда"),
                 new Abbreviation("лаҳҷ.", "лаҳҷавӣ"),
-                new Abbreviation("лот.", "лотинӣ"),
-                new Abbreviation("м.", "муғулӣ"),
+                new Abbreviation("лот.", "лотинӣ", true),
+                new Abbreviation("м.", "муғулӣ", true),
                 new Abbreviation("мақ.", "мақол"),
-                new Abbreviation("мал.", "малайзӣ"),
+                new Abbreviation("мал.", "малайзӣ", true),
                 new Abbreviation("мант.", "мантиқ"),
                 new Abbreviation("мас.", "масалан"),
                 new Abbreviation("маҷ.", "маҷозан"),
@@ -79,13 +79,13 @@ namespace Loughat.Tests
                 new Abbreviation("нум.", "нумератив"),
                 new Abbreviation("нуҷ.", "илми нуҷум"),
                 new Abbreviation("обҳш.", "обуҳавошиносӣ"),
-                new Abbreviation("олм.", "олмонӣ"),
+                new Abbreviation("олм.", "олмонӣ", true),
                 new Abbreviation("омӯз.", "омӯзгорӣ"),
                 new Abbreviation("пасв.", "пасванд"),
                 new Abbreviation("пешв.", "пешванд"),
-                new Abbreviation("пол.", "поландӣ"),
-                new Abbreviation("порт.", "португалӣ"),
-                new Abbreviation("р.", "русӣ"),
+                new Abbreviation("пол.", "поландӣ", true),
+                new Abbreviation("порт.", "португалӣ", true),
+                new Abbreviation("р.", "русӣ", true),
                 new Abbreviation("радио.", "радиотехника"),
                 new Abbreviation("риёз.", "риёзиёт, математика"),
                 new Abbreviation("р.-оҳ.", "роҳи оҳан"),
@@ -94,8 +94,8 @@ namespace Loughat.Tests
                 new Abbreviation("санъ.", "санъат"),
                 new Abbreviation("сохт.", "сохтмон"),
                 new Abbreviation("сур.", "суриёнй"),
-                new Abbreviation("т.", "туркӣ"),
-                new Abbreviation("т.-м.", "туркию муғулӣ"),
+                new Abbreviation("т.", "туркӣ", true),
+                new Abbreviation("т.-м.", "туркию муғулӣ", true),
                 new Abbreviation("таҳқ.", "сухани таҳқиромез"),
                 new Abbreviation("таър.", "таърихӣ"),
                 new Abbreviation("тех.", "техника"),
@@ -107,23 +107,23 @@ namespace Loughat.Tests
                 new Abbreviation("фолк.", "фолклор"),
                 new Abbreviation("фр.", "фаронсавӣ"),
                 new Abbreviation("хим.", "химия"),
-                new Abbreviation("хит.", "хитоӣ"),
+                new Abbreviation("хит.", "хитоӣ", true), // 'cheeny'
                 new Abbreviation("хӯр.", "хӯрокворӣ"),
-                new Abbreviation("ҳ.", "ҳиндӣ"),
+                new Abbreviation("ҳ.", "ҳиндӣ", true),
                 new Abbreviation("ҳ.", "ҳарбӣ"),
                 new Abbreviation("ҳанд.", "ҳандаса"),
                 new Abbreviation("ҳисобд.", "ҳисобдорӣ"),
-                new Abbreviation("ҳол.", "ҳолландӣ"),
+                new Abbreviation("ҳол.", "ҳолландӣ", true),
                 new Abbreviation("ҳуқ.", "ҳуқуқшиносӣ"),
-                new Abbreviation("ч.", "чехӣ"),
+                new Abbreviation("ч.", "чехӣ", true),
                 new Abbreviation("чорв.", "чорводорӣ"),
                 new Abbreviation("ҷ.", "ҷамъи..."),
                 new Abbreviation("ҷугр.", "ҷуғрофия"),
                 new Abbreviation("ш.", "шаҳри..."),
-                new Abbreviation("швед.", "шведӣ"),
-                new Abbreviation("ю.", "юнонӣ"),
-                new Abbreviation("я.", "яҳудӣ"),
-                new Abbreviation("яп.", "японӣ")
+                new Abbreviation("швед.", "шведӣ", true),
+                new Abbreviation("ю.", "юнонӣ", true),
+                new Abbreviation("я.", "яҳудӣ", true),
+                new Abbreviation("яп.", "японӣ", true) // 'jopony'
             };
 
             var abbrDict = abbreviations.ToDictionary(a => a.Short, a => a.Full);
@@ -133,6 +133,8 @@ namespace Loughat.Tests
         [Theory]
         public void GenerateAlphabet()
         {
+            // TODO: Add pages 
+
             var aplhabet = new Alphabet()
             {
                 Letters = new Dictionary<string, Definition>()

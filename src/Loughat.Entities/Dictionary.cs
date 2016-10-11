@@ -11,6 +11,9 @@ namespace Loughat.Entities
         public string Id { get; set; }
         public string Name { get; set; }
 
+        // TODO: Create Author entity
+        public List<string> Authors { get; set; }
+
         // TODO: Add all remaining data, including the foreword etc.
     }
 }
