@@ -1,6 +1,7 @@
 ﻿using Loughat.Entities;
 using Loughat.Entities.Enums;
 using Loughat.Entities.Extensions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,6 +124,55 @@ namespace Loughat.Tests
                 new Abbreviation("ю.", "юнонӣ"),
                 new Abbreviation("я.", "яҳудӣ"),
                 new Abbreviation("яп.", "японӣ")
+            };
+
+            var abbrDict = abbreviations.ToDictionary(a => a.Short, a => a.Full);
+            var serializedDict = JsonConvert.SerializeObject(abbrDict);
+        }
+
+        [Theory]
+        public void GenerateAlphabet()
+        {
+            var aplhabet = new Alphabet()
+            {
+                Letters = new Dictionary<string, Definition>()
+                {
+                    { "А", new Definition(LanguageCode.Tj, "а") },
+                    { "Б", new Definition(LanguageCode.Tj, "бе") },
+                    { "В", new Definition(LanguageCode.Tj, "ве") },
+                    { "Г", new Definition(LanguageCode.Tj, "ге") },
+                    { "Ғ", new Definition(LanguageCode.Tj, "ғe") },
+                    { "Д", new Definition(LanguageCode.Tj, "де") },
+                    { "Е", new Definition(LanguageCode.Tj, "йе") },
+                    { "Ё", new Definition(LanguageCode.Tj, "йо") },
+                    { "Ж", new Definition(LanguageCode.Tj, "же") },
+                    { "З", new Definition(LanguageCode.Tj, "зе") },
+                    { "И", new Definition(LanguageCode.Tj, "И") },
+                    { "Ӣ", new Definition(LanguageCode.Tj, "ӣ") },
+                    { "Й", new Definition(LanguageCode.Tj, "ий") },
+                    { "К", new Definition(LanguageCode.Tj, "ке") },
+                    { "Қ", new Definition(LanguageCode.Tj, "қе") },
+                    { "Л", new Definition(LanguageCode.Tj, "ле") },
+                    { "М", new Definition(LanguageCode.Tj, "ме") },
+                    { "Н", new Definition(LanguageCode.Tj, "не") },
+                    { "О", new Definition(LanguageCode.Tj, "о") },
+                    { "П", new Definition(LanguageCode.Tj, "пе") },
+                    { "Р", new Definition(LanguageCode.Tj, "ре") },
+                    { "С", new Definition(LanguageCode.Tj, "се") },
+                    { "Т", new Definition(LanguageCode.Tj, "те") },
+                    { "У", new Definition(LanguageCode.Tj, "у") },
+                    { "Ӯ", new Definition(LanguageCode.Tj, "ӯ") },
+                    { "Ф", new Definition(LanguageCode.Tj, "фе") },
+                    { "Х", new Definition(LanguageCode.Tj, "хе") },
+                    { "Ҳ", new Definition(LanguageCode.Tj, "ҳe") },
+                    { "Ч", new Definition(LanguageCode.Tj, "че") },
+                    { "Ҷ", new Definition(LanguageCode.Tj, "ҷе") },
+                    { "Ш", new Definition(LanguageCode.Tj, "ше") },
+                    { "Ъ", new Definition(LanguageCode.Tj, "ъ") },
+                    { "Э", new Definition(LanguageCode.Tj, "э") },
+                    { "Ю", new Definition(LanguageCode.Tj, "йу") },
+                    { "Я", new Definition(LanguageCode.Tj, "йа") }
+                }
             };
         }
 

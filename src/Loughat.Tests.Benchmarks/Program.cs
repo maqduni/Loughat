@@ -9,6 +9,10 @@ namespace Loughat.Tests.Benchmarks
     {
         public static void Main(string[] args)
         {
+            var seedTest = new Seed();
+            seedTest.GenerateAbbreviations();
+
+            Console.Read();
         }
     }
 }
