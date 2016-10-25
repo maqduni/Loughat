@@ -2,7 +2,13 @@
   "version": "1.0.0",
   "name": "asp.net",
   "private": true,
+  "scripts": {
+    "ws": "http-server 'wwwroot' -o",
+    "scss": "node-sass 'wwwroot/assets/scss/app.scss' 'wwwroot/assets/app.css'"
+  },
   "devDependencies": {
-    "bower": "^1.7.9"
+    "bower": "^1.7.9",
+    "http-server": "^0.9.0",
+    "node-sass": "^3.10.1"
   }
 }
