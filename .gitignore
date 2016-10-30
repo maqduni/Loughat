@@ -29,6 +29,7 @@ bld/
 
 ## Loughat project specific files
 src/Loughat/wwwroot/lib/
+src/Loughat/wwwroot/public/
 .vscode/
 *.css
 
