@@ -1,4 +1,9 @@
-//TODO: Configure scss bundling
+//TODO: Configure scss bundling http://webpack.github.io/docs/stylesheets.html
+//https://github.com/toddmotto/angular-styleguide#modular-architecture
+
+//TODO: Look at webpack-dev-server
+//TODO: Look at strip-loader
+
 var webpack = require('webpack');
 module.exports = {
   entry: {

@@ -6,8 +6,7 @@
     "ws": "http-server 'wwwroot' -o",
     "scss": "node-sass 'wwwroot/app/app.scss' 'wwwroot/public/app.css'",
     "wp-dev": "webpack -d --progress --colors",
-    "wp-dev:w": "webpack -d --progress --colors --watch",
-    "wp-dev:h": "webpack -d --progress --colors --hot"
+    "wp-dev:w": "webpack -d --progress --colors --watch"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",
@@ -21,6 +20,7 @@
     "ng-annotate-loader": "^0.2.0",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^3.10.1",
-    "webpack": "^1.13.3"
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }

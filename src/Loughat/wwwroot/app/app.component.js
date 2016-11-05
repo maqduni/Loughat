@@ -2,6 +2,7 @@ export const AppComponent = {
     template: `
         <header>
             Hello world
+            <login></login>
         </header>
         <div>
             <div ui-view></div>
@@ -12,6 +13,6 @@ export const AppComponent = {
     `
     ,
     controller: function () {
-        console.log('Test App Ctrl', this);
+        // console.log('App Ctrl', this);
     }
 };
