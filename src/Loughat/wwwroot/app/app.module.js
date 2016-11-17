@@ -4,7 +4,8 @@ import uiRouter from 'angular-ui-router';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { CommonModule } from './common/common.module';
-import { MockModule } from './mock/mock.module'
+import { MockModule } from './mock/mock.module';
+import { FiltersModule } from './common/filters/filters.module';
 // import './app.scss';
 
 export const AppModule = angular
@@ -12,12 +13,13 @@ export const AppModule = angular
         ComponentsModule,
         CommonModule,
         uiRouter,
-        MockModule
+        MockModule,
+        FiltersModule
     ])
     .component('app', AppComponent)
     .config(($stateProvider, $urlRouterProvider) => {
         'ngInject';
-        // console.log('Configure states', $stateProvider, $urlRouterProvider, angular.module('app'));
+        
         let states = [
             {
                 name: 'app',
@@ -29,16 +31,16 @@ export const AppModule = angular
                 //     }
                 // }
             },
-            {
-                name: 'hello',
-                url: '/hello',
-                template: '<h3>hello world!</h3>'
-            },
-            {
-                name: 'about',
-                url: '/about',
-                template: '<h3>Its the UI-Router hello world app!</h3>'
-            },
+            // {
+            //     name: 'hello',
+            //     url: '/hello',
+            //     template: '<h3>hello world!</h3>'
+            // },
+            // {
+            //     name: 'about',
+            //     url: '/about',
+            //     template: '<h3>Its the UI-Router hello world app!</h3>'
+            // },
         ];
 
         // Loop over the state definitions and register them

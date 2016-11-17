@@ -5,6 +5,7 @@
   "scripts": {
     "ws": "http-server 'wwwroot' -o",
     "scss": "node-sass 'wwwroot/app/app.scss' 'wwwroot/public/app.css'",
+    "scss:w": "node-sass 'wwwroot/app/app.scss' 'wwwroot/public/app.css' --watch",
     "wp-dev": "webpack -d --progress --colors",
     "wp-dev:w": "webpack -d --progress --colors --watch"
   },
@@ -13,6 +14,8 @@
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
     "bower": "^1.7.9",
+    "eslint": "^3.9.1",
+    "eslint-config-google": "^0.7.0",
     "exports-loader": "^0.6.3",
     "http-server": "^0.9.0",
     "jshint": "^2.9.4",
@@ -20,6 +23,7 @@
     "ng-annotate-loader": "^0.2.0",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^3.10.1",
+    "typings": "^2.0.0",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   }

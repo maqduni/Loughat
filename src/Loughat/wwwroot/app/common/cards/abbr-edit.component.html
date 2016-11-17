@@ -1,0 +1,4 @@
+<select ng-model="$ctrl.shortValue" 
+        ng-options="abbr.Short as abbr.Full for abbr in $ctrl.abbreviations" ng-change="$ctrl.updateViewValue()">
+        <option value=""></option>
+</select>

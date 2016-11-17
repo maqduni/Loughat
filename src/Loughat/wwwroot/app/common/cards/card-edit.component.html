@@ -1,0 +1,17 @@
+<section class="card-edit" ng-switch="$ctrl.editMode === true">
+    <div ng-switch-when="true">
+        <div>
+            <pre>{{$ctrl.currentCard|json}}</pre>
+            <label for="">Word origin</label>
+            <abbr-edit is-lang ng-model="$ctrl.currentCard.Origin.Tj"></abbr-edit>
+        </div>
+        <div>
+            <h4>Preview:</h4>
+            <card card="$ctrl.currentCard"/>
+        </div>
+    </div>
+    <div ng-switch-when="false">
+        <card card="$ctrl.currentCard"></card>
+        <button type="button" ng-click="$ctrl.editMode = true">Edit</button>
+    </div>
+</section>

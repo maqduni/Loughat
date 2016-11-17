@@ -1,0 +1,30 @@
+<!--<pre>{{$ctrl.card|json}}</pre>-->
+<section class="card">
+    <span class="term-tj">{{$ctrl.card.Word.Tj}}</span>
+    <span class="origin" ng-bind-html="$ctrl.card.Origin.Tj"></span>
+    <span class="term-fa">{{$ctrl.card.Word.Fa}}</span>
+    <div class="definition" ng-repeat="definition in ::$ctrl.card.Definitions">
+        <span class="definition-number" ng-show="::($ctrl.card.Definitions.length > 1)">{{$index + 1}}.</span>
+        <span class="definition-body" ng-bind-html="definition.Tj"></span>
+    </div>
+</section>
+<!--<section class="card" ng-switch="$ctrl.editMode === true">
+    <div ng-switch-when="true">
+        <div>
+            <label for="">Word origin</label>
+            <pre>{{$ctrl.card.Origin.Tj}}</pre>
+            <select ng-model="$ctrl.card.Origin.Tj" 
+                ng-options="abbr.Short as abbr.Full for abbr in $ctrl.languageAbbreviations"></select>
+        </div>
+    </div>
+    <div ng-switch-when="false">
+        <span class="term-tj">{{$ctrl.card.Word.Tj}}</span>
+        <span class="origin" ng-bind-html="$ctrl.card.Origin.Tj"></span>
+        <span class="term-fa">{{$ctrl.card.Word.Fa}}</span>
+        <div class="definition" ng-repeat="definition in ::$ctrl.card.Definitions">
+            <span class="definition-number" ng-show="::($ctrl.card.Definitions.length > 1)">{{$index + 1}}.</span>
+            <span class="definition-body" ng-bind-html="definition.Tj"></span>
+        </div>
+        <button type="button" ng-click="$ctrl.editMode = true">Edit</button>
+    </div>
+</section>-->

@@ -43,7 +43,7 @@ namespace Loughat.Entities
         /// Abbreviation of the origin of the word
         /// </summary>
         public Definition Origin { get; set; }
-
+        
         /// <summary>
         /// List of word definitions
         /// </summary>

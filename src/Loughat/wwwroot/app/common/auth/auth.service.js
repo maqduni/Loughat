@@ -1,12 +1,12 @@
 export class AuthService {
-    constructor(appConfig, $http, $q) {
-        this.appConfig = appConfig;
+    constructor(appConfigService, $http, $q) {
+        this.appConfigService = appConfigService;
         this.$http = $http;
         this.$q = $q;
     }
 
     isAuthenticated() {
-        return !!this.appConfig.authToken;
+        return !!this.appConfigService.authToken;
     }
 
     authenticate(username, password) {
@@ -17,13 +17,13 @@ export class AuthService {
                 username: username,
                 password: password
             }).then((result) => {
-                this.appConfig.authToken = result.data;
-                this.appConfig.save();
+                this.appConfigService.authToken = result.data;
+                this.appConfigService.save();
 
                 resolve(result);
             }, (error) => {
-                this.appConfig.authToken = undefined;
-                this.appConfig.save();
+                this.appConfigService.authToken = undefined;
+                this.appConfigService.save();
 
                 reject(error);
             });
@@ -33,8 +33,8 @@ export class AuthService {
     logout() {
         return this.$q((resolve, reject) => {
             this.$http.post(`/api/account/logout`, null).then((result) => {
-                this.appConfig.authToken = undefined;
-                this.appConfig.save();
+                this.appConfigService.authToken = undefined;
+                this.appConfigService.save();
 
                 resolve(result.data);
             }, (error) => {

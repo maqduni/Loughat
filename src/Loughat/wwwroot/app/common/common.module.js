@@ -1,28 +1,49 @@
 import angular from 'angular';
+import uiRouter from 'angular-ui-router';
 // import { NavModule } from './nav/nav.module';
 // import { FooterModule } from './footer/footer.module';
 import { AuthService } from './auth/auth.service';
 import { LoginComponent } from './auth/login.component';
 import { AppConfigService } from './app-config.service';
 
+import { CardsModule } from './../common/cards/cards.module';
+
+
 export const CommonModule = angular
   .module('app.common', [
-    // NavModule,
+    uiRouter,
+    CardsModule,
     // FooterModule
   ])
-  .service('auth', AuthService)
-  .service('appConfig', AppConfigService)
+  .service('authService', AuthService)
+  .service('appConfigService', AppConfigService)
   .component('login', LoginComponent)
-  .config(($httpProvider) => {
+  .config(($stateProvider, $httpProvider) => {
+    //TODO: Think of creating a separate file for this block
+
+    // Register routes
+    let states = [
+      {
+        name: 'login',
+        url: '/login',
+        component: 'login',
+      }
+    ];
+
+    // Loop over the state definitions and register them
+    states.forEach((state) => {
+      $stateProvider.state(state);
+    });
+
     // $httpProvider interceptors 
-    $httpProvider.interceptors.push((appConfig) =>  {
+    $httpProvider.interceptors.push((appConfigService) => {
       'ngInject';
 
       return {
         'request': (config) => {
-          let aconf = appConfig.load();
-          if (aconf.authToken) {
-            config.headers['Auth-Token'] = aconf.authToken;
+          appConfigService.load();
+          if (appConfigService.authToken) {
+            config.headers['Auth-Token'] = appConfigService.authToken;
           }
           return config;
         },

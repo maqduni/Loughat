@@ -11,8 +11,7 @@ export class AuthServiceMock {
     }
 
     configure($httpBackend) {
-        // let reqh = $httpBackend.whenPOST(`\/api\/account\/login`);
-        $httpBackend.whenPOST(`\/api\/account\/login`).respond((method, url, data, headers, params) => {
+        $httpBackend.whenPOST(`/api/account/login`).respond((method, url, data, headers, params) => {
             var dobj = angular.fromJson(data);
             if (~this.usernames.indexOf(dobj.username.trim()) && dobj.password.trim() === 'P@ssw0rd1') {
                 return [200, this.authToken];
@@ -20,14 +19,15 @@ export class AuthServiceMock {
             return [401, null, {}, 'Authentication failed'];
         });
 
-        this.authorize($httpBackend.whenPOST(`\/api\/account\/test`), (method, url, data, headers, params) => {
+        this.authorize($httpBackend.whenPOST(`/api/account/test`), (method, url, data, headers, params) => {
             return [200, 'Auth header and token test passed'];
         });
     }
 
     authorize(requestHandler, respondWith) {
         requestHandler.respond((method, url, data, headers, params) => {
-            return headers['Auth-Token'] === this.authToken ? respondWith(method, url, data, headers, params) : [401, null, {}, 'Unathorized request'];
+            return headers['Auth-Token'] === this.authToken ? 
+            respondWith(method, url, data, headers, params) : [401, null, {}, 'Unathorized request'];
         });
     }
     // authenticate(username, password) {

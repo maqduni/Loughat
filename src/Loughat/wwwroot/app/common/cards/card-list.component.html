@@ -1,0 +1,8 @@
+<ng-form name="cardSearchForm">
+    <input type="text" name="search" ng-model="$ctrl.term">
+    <button type="button" ng-click="$ctrl.search()">Search</button>
+</ng-form>
+
+<section class="card-list">
+    <card-edit ng-repeat="card in $ctrl.cards" card="card"></card-edit>
+</section>

@@ -126,8 +126,8 @@ namespace Loughat.Tests
                 new Abbreviation("яп.", "японӣ", true) // 'jopony'
             };
 
-            var abbrDict = abbreviations.ToDictionary(a => a.Short, a => a.Full);
-            var serializedDict = JsonConvert.SerializeObject(abbrDict);
+            //var abbrDict = abbreviations.ToDictionary(a => a.Short, a => a.Full);
+            var serializedDict = JsonConvert.SerializeObject(abbreviations);
         }
 
         [Theory]
@@ -149,7 +149,7 @@ namespace Loughat.Tests
                     { "Ё", new Definition(LanguageCode.Tj, "йо") },
                     { "Ж", new Definition(LanguageCode.Tj, "же") },
                     { "З", new Definition(LanguageCode.Tj, "зе") },
-                    { "И", new Definition(LanguageCode.Tj, "И") },
+                    { "И", new Definition(LanguageCode.Tj, "и") },
                     { "Ӣ", new Definition(LanguageCode.Tj, "ӣ") },
                     { "Й", new Definition(LanguageCode.Tj, "ий") },
                     { "К", new Definition(LanguageCode.Tj, "ке") },
@@ -176,6 +176,8 @@ namespace Loughat.Tests
                     { "Я", new Definition(LanguageCode.Tj, "йа") }
                 }
             };
+
+            var serializedAbc = JsonConvert.SerializeObject(aplhabet);
         }
 
         [Theory]
@@ -196,64 +198,309 @@ namespace Loughat.Tests
 
              */
 
-            var card1 = new Card() {
-                Id = $"Cards/{Guid.NewGuid()}", // TODO: Use Raven conventions to generate the id for new objects
-                Type = CardType.Letter,
-                Letter = 'А',
-                Pages = new int[] { 29 },
-                Word = new Definition() {
-                    Tj = "А"
+            // Hold all cards in a List<Card>
+            var cards = new List<Card>() {
+                new Card() {
+                    Id = $"Cards/{Guid.NewGuid()}", // TODO: Use Raven conventions to generate the id for new objects
+                    Type = CardType.Letter,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition() {
+                        Tj = "А"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            // TODO: Not everything is italic in the definition of the letter, review!!!
+                            Tj = @"ҳарфи аввали алифбои ҳозираи тоҷикӣ; дар алифбои арабиасоси тоҷикӣ бо ҳарфҳои «алиф» (ا), «айн» (ع) ва дар охири як гурӯҳ калимаҳо бо «ҳои ҳавваз» (ه) ифода мешавад; ҳарфи «алиф» дар ҳисоби абҷад ба адади 1 баробар аст; ҳарфи «А» дар гурӯҳбандии синфҳои таълимӣ, табақабандии мавзӯъҳо ва <abbr>ғ.</abbr> ба ҷои шумораи якум ба кор меравад."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
                 },
-                Definitions = new List<Definition>() {
-                    new Definition()
+                new Card()
+                {
+                    Type = CardType.Suffix, // TODO: Verify whether ҳиссача is suffix
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
                     {
-                        // TODO: Not everything is italic in the definition of the letter, review!!!
-                        Tj = @"ҳарфи аввали алифбои ҳозираи тоҷикӣ; дар алифбои арабиасоси тоҷикӣ бо ҳарфҳои «алиф» (ا), «айн» (ع) ва дар охири як гурӯҳ калимаҳо бо «ҳои ҳавваз» (ه) ифода мешавад; ҳарфи «алиф» дар ҳисоби абҷад ба адади 1 баробар аст; ҳарфи «А» дар гурӯҳбандии синфҳои таълимӣ, табақабандии мавзӯъҳо ва <abbr>ғ.</abbr> ба ҷои шумораи якум ба кор меравад."
-                    }
+                        Tj = "-А"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<i>ҳиссачаест, ки бо феъл омада, маънои</i> тааҷҷуб, таассуф, эҳсос, ҳаяҷон <i>ва гайраро ифода мекунад:</i> <b>чӣ гуфтед-а?, бахтро бинед-а!</b>"
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
                 },
-                Dictionary = dictionary.GetDenormalizedReference()
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition() // TODO: Consider replacing the definition with a Dictionary<Enum.Language, string>
+                    {
+                        Tj = "ААМ(М)",
+                        Fa = "اعم"
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>кит.</abbr> омтар, умумитар, фарогиртар; <b>аам аз он ки...</b> сарфи назар аз он ки..., бо вуҷуди он ки..., новобаста ба он"
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБ",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>кит.</abbr> падар, волид."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАВАЙН",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>кит.</abbr>, <abbr>ҷ.</abbr> дугонаи аб; падару модар, волидайн."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАВИЯТ",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>кит.</abbr> падарӣ, падарӣ кардан."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАВИЯТ",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>кит.</abbr> падарӣ, падарӣ кардан."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАВИ",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>кит.</abbr> <i>мансуб ба</i> <b>аб</b>." // TODO: Add links to other words 
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАВОН",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>кит.</abbr> падару модар, волидайн."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАД",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>кит.</abbr> ҳамешагӣ, ҷовидон, доимӣ: <b>умри абад; то абад</b> ҳамеша, доим; <b>ҳабси абад</b> ҳабси якумрӣ, ҳабси доимӣ."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАДА",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>ҷ.</abbr> <b>обид; абадаи авсон</b> бутпарастон."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАДАН",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"ба таври ҳамешагӣ, ҷовидон."
+                        },
+                        new Definition()
+                        {
+                            Tj = @"ҳаргиз, ҳеҷ гоҳ, ҳеҷ вақт."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАДЗИНДА",
+                        Fa = ""
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"ҷовидон, абадӣ, ҳамешазинда, ба таври ҳамешагй, фанонопазир."
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                },
+                new Card()
+                {
+                    Type = CardType.Word,
+                    Letter = 'А',
+                    Pages = new int[] { 29 },
+                    Word = new Definition()
+                    {
+                        Tj = "АБАДАН",
+                        Fa = ""
+                    },
+                    Origin  = new Definition()
+                    {
+                        Tj = "<abbr lang=\"true\">a.</abbr>"
+                    },
+                    Definitions = new List<Definition>() {
+                        new Definition()
+                        {
+                            Tj = @"<abbr>фалс.</abbr> ҷовидонӣ, пояндагӣ, фанонопазирӣ: <b>абадияти вақт, абадияти олам, абадияти ҳаракат.</b>"
+                        }
+                    },
+                    Dictionary = dictionary.GetDenormalizedReference()
+                }
             };
 
-            var card2 = new Card()
-            {
-                Type = CardType.Suffix, // TODO: Verify whether ҳиссача is suffix
-                Letter = 'А',
-                Pages = new int[] { 29 },
-                Word = new Definition()
-                {
-                    Tj = "-А"
-                },
-                Definitions = new List<Definition>() {
-                    new Definition()
-                    {
-                        Tj = @"<i>ҳиссачаест, ки бо феъл омада, маънои</i> тааҷҷуб, таассуф, эҳсос, ҳаяҷон <i>ва гайраро ифода мекунад:</i> <b>чӣ гуфтед-а?, бахтро бинед-а!</b>"
-                    }
-                },
-                Dictionary = dictionary.GetDenormalizedReference()
-            };
-
-            var card3 = new Card()
-            {
-                Type = CardType.Word,
-                Letter = 'А',
-                Pages = new int[] { 29 },
-                Word = new Definition() // TODO: Consider replacing the definition with a Dictionary<Enum.Language, string>
-                {
-                    Tj = "ААМ(М)",
-                    Fa = "اعم"
-                },
-                Origin  = new Definition()
-                {
-                    Tj = "a." // TODO: Possibly point directly to the abbreviation
-                },
-                Definitions = new List<Definition>() {
-                    new Definition()
-                    {
-                        Tj = @"<abbr>кит.</abbr> омтар, умумитар, фарогиртар; <b>аам аз он ки...</b> сарфи назар аз он ки..., бо вуҷуди он ки..., новобаста ба он"
-                    }
-                },
-                Dictionary = dictionary.GetDenormalizedReference()
-            };
+            var serializedList = JsonConvert.SerializeObject(cards);
         }
     }
 }

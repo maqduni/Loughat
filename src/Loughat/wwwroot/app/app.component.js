@@ -2,7 +2,6 @@ export const AppComponent = {
     template: `
         <header>
             Hello world
-            <login></login>
         </header>
         <div>
             <div ui-view></div>
