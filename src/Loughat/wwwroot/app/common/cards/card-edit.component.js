@@ -1,3 +1,7 @@
+import angular from 'angular';
+import { CardType } from './../enums/card-type.enum';
+import './card-edit.component.scss';
+
 export const CardEditComponent = {
     templateUrl: './app/common/cards/card-edit.component.html',
     bindings: {
@@ -10,17 +14,19 @@ export const CardEditComponent = {
         }
 
         $onInit() {
-            this.cardType = {
-                0: 'Letter',
-                1: 'Word'
-            };
-
+            this.types = CardType;
             this.languageAbbreviations = this.lookupService.languageAbbreviations(true);
-            this.currentCard = angular.copy(this.card);
+            this.alphabet = this.lookupService.alphabet(true);
+
+            this.current = angular.copy(this.card);
+        }
+
+        test() {
+            
         }
 
         cancel() {
-            this.currentCard = angular.copy(this.card);
+            this.current = angular.copy(this.card);
         }
     }
 };

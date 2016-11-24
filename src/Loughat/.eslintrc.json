@@ -9,5 +9,8 @@
     "extends": "eslint:recommended",
     "no-undef": 1,
     "no-unused-vars": 1,
-    "object-curly-spacing": 1
+    "object-curly-spacing": 1,
+    "globals": {
+        "$": true
+    }
 }

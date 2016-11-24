@@ -89,7 +89,7 @@ export class CardServiceMock {
                     "Fa": "اعم"
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -116,7 +116,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -143,7 +143,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -170,7 +170,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -197,7 +197,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -224,7 +224,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -251,7 +251,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -278,7 +278,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -305,7 +305,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -332,7 +332,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [
@@ -387,7 +387,7 @@ export class CardServiceMock {
                     "Fa": ""
                 },
                 "Origin": {
-                    "Tj": "<abbr>a.</abbr>",
+                    "Tj": "<abbr is-lang>а.</abbr>",
                     "Fa": null
                 },
                 "Definitions": [

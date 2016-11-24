@@ -1,17 +1,53 @@
-<section class="card-edit" ng-switch="$ctrl.editMode === true">
+<section class="card-edit" ng-switch="$ctrl.editMode === true" ng-init="$ctrl.editMode = true">
     <div ng-switch-when="true">
+        <h4>Edit:</h4>
+        <!--<pre>{{$ctrl.current|json}}</pre>-->
         <div>
-            <pre>{{$ctrl.currentCard|json}}</pre>
-            <label for="">Word origin</label>
-            <abbr-edit is-lang ng-model="$ctrl.currentCard.Origin.Tj"></abbr-edit>
+            <!--TODO: Add auto-detection-->
+            <label for="">Card type</label>
+            <select ng-options="key for (key, value) in $ctrl.types"
+                ng-model="$ctrl.current.Type"></select>
+        </div>
+        <div>
+            <label for="">Located at letter</label>
+            <!--TODO: Add auto-detection-->
+            <select ng-options="key as key for (key, value) in $ctrl.alphabet.Letters"
+                ng-model="$ctrl.current.Letter"></select>
+        </div>
+        <div>
+            <label for="">Located on page(s)</label>
+            <!--TODO: Add auto-detection-->
+        </div>
+        <div>
+            <label for="">Word</label>
+            <!--TODO: Tajik version has to be uppercased automatically-->
+            <div>
+                <label for="">Tajik</label>
+                <input type="text" name="wordTj" ng-model="$ctrl.current.Word.Tj" lang="tj" virtkeys>
+            </div>
+            <div ng-show="$ctrl.current.Type === $ctrl.types.Word">
+                <label for="">Farsi</label>
+                <input type="text" name="wordFa" ng-model="$ctrl.current.Word.Fa" lang="fa" virtkeys>
+            </div>
+        </div>
+        <div ng-show="$ctrl.current.Type === $ctrl.types.Word">
+            <label for="">Origin</label>
+            <abbr-edit is-lang ng-model="$ctrl.current.Origin.Tj"></abbr-edit>
+        </div>
+        <div>
+            <label for="">Definitions</label>
+            <div ng-repeat="def in $ctrl.current.Definitions">
+                <span ng-show="$ctrl.current.Definitions.length > 1">{{$index}}</span>
+                <textarea ng-model="def.Tj" lang="tj"></textarea>
+            </div>
         </div>
         <div>
             <h4>Preview:</h4>
-            <card card="$ctrl.currentCard"/>
+            <card card="$ctrl.current"/>
         </div>
     </div>
     <div ng-switch-when="false">
-        <card card="$ctrl.currentCard"></card>
+        <card card="$ctrl.current"></card>
         <button type="button" ng-click="$ctrl.editMode = true">Edit</button>
     </div>
 </section>

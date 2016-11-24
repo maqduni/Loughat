@@ -16,7 +16,7 @@ export const CardListComponent = {
         search() {
             this.cardService.search(this.term).then((data) => {
                 // console.log(data);
-                this.cards = data;
+                this.cards = [data[2]];
             });
         }
     }

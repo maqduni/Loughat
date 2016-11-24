@@ -47,10 +47,17 @@ export const CommonModule = angular
           }
           return config;
         },
+        'responseError': function (response) {
+          switch (+response.status) {
+            case 401:
+              console.log(response);
+              break;
+            default:
+              break;
+          }
 
-        // 'response': function (response) {
-        //   // same as above
-        // }
+          return response;
+        }
       };
     });
   })

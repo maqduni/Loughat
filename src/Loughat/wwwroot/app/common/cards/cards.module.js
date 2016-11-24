@@ -1,6 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import defaultMember from 'angular-sanitize';
+import 'angular-sanitize';
 
 import { CardComponent } from './card.component';
 import { CardEditComponent } from './card-edit.component';
@@ -9,6 +9,8 @@ import { CardService } from './card.service';
 import { AbbrComponent } from './abbr.component';
 import { AbbrEditComponent } from './abbr-edit.component';
 import { LookupService } from './lookup.service';
+
+import { VirtkeysDirective } from './virtkeys.directive';
 
 export const CardsModule = angular
     .module('app.cards', [
@@ -22,6 +24,10 @@ export const CardsModule = angular
     .component('abbrEdit', AbbrEditComponent)
     .service('cardService', CardService)
     .service('lookupService', LookupService)
+    
+    // Read this post. http://stackoverflow.com/questions/28620479/using-es6-classes-as-angular-1-x-directives
+    //http://www.michaelbromley.co.uk/blog/350/exploring-es6-classes-in-angularjs-1-x#_section-factories
+    .directive('virtkeys', () => new VirtkeysDirective())
     .config(($stateProvider) => {
         'ngInject';
 

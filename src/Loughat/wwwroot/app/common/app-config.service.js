@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 export class AppConfigService {
     constructor() {
         // this.sort = '+date';

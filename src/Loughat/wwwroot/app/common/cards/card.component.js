@@ -1,3 +1,5 @@
+import './card.component.scss';
+
 export const CardComponent = {
     templateUrl: './app/common/cards/card.component.html',
     bindings: {

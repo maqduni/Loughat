@@ -1,17 +1,29 @@
 //TODO: Configure scss bundling http://webpack.github.io/docs/stylesheets.html
 //https://github.com/toddmotto/angular-styleguide#modular-architecture
+//https://65535th.com/jquery-plugins-and-webpack/
+//http://michalzalecki.com/lazy-load-angularjs-with-webpack/
+//https://www.jonathan-petitcolas.com/2015/05/15/howto-setup-webpack-on-es6-react-application-with-sass.html
 
 //TODO: Look at webpack-dev-server
 //TODO: Look at strip-loader
 
-var webpack = require('webpack');
+// TODO: Create local namspaces for scss files
+// TODO: Copy assets to dedicated folders, not dump them all in public
+
+var webpack = require('webpack'),
+  // Plugins
+  ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
   entry: {
     app: './wwwroot/app/app.module.js',
     vendor: [
       'angular',
-      'angular-ui-router'
-    ]
+      'angular-ui-router',
+      'angular-sanitize',
+      'angular-mocks'
+    ],
+    // css: './wwwroot/app/app.scss'
   },
   output: {
     path: './wwwroot/public',
@@ -19,17 +31,21 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /.js$/, loader: 'ng-annotate-loader' },
+      { test: /.js$/, loader: 'ng-annotate' },
       {
         test: /.js$/,
         exclude: /(node_modules|lib)/,
-        loader: 'babel-loader',
+        loader: 'babel',
         query: {
           cacheDirectory: true, 
           presets: ['es2015']
         }
       },
-      { test: /[\/]angular\.js$/, loader: 'exports-loader?angular' }
+      { test: /[\/]angular\.js$/, loader: 'exports?angular' },
+      { test: /[\/]jquery\.js$/, loader: 'expose?$!expose?jQuery' },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') },
+      { test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/, loader: 'file' },
+      { test: /\.gif?$|\.png?$|\.jpg?$/, loader: 'file' },
     ]
   },
   resolve: {
@@ -40,6 +56,9 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'vendor', /* filename= */'vendor.bundle.js'),
     new webpack.ResolverPlugin(
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
-    )
+    ),
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
+    })
   ]
 }

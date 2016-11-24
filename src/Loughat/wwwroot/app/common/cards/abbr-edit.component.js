@@ -32,6 +32,10 @@ export const AbbrEditComponent = {
 
                 return null;
             });
+
+            this.ngModel.$render = () => {
+                this.shortValue = this.ngModel.$viewValue;
+            };
         }
         
         updateViewValue() {

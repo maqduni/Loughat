@@ -1,5 +1,5 @@
 import angular from 'angular';
-import defaultMember from 'angular-mocks';
+import 'angular-mocks';
 import { AuthServiceMock } from './../common/auth/auth.service.mock';
 import { CardServiceMock } from './../common/cards/card.service.mock';
 import { LookupServiceMock } from './../common/cards/lookup.service.mock';

@@ -10,14 +10,17 @@ export class LookupServiceMock {
 
     configure($httpBackend, authServiceMock) {
         authServiceMock.authorize($httpBackend.whenGET(/\/api\/lookup\/abbreviations/), (method, url, data, headers, params) => {
-            // console.log(params);
             let resData = this.abbreviations.filter((i) => { return !i.IsLanguageName; });
-            // console.log(responseData);
             return [200, resData];
         });
 
         authServiceMock.authorize($httpBackend.whenGET(/\/api\/lookup\/language-abbreviations/), (method, url, data, headers, params) => {
             let resData = this.abbreviations.filter((i) => { return i.IsLanguageName; });
+            return [200, resData];
+        });
+
+        authServiceMock.authorize($httpBackend.whenGET(/\/api\/lookup\/alphabet/), (method, url, data, headers, params) => {
+            let resData = this.alphabet;
             return [200, resData];
         });
     }
@@ -675,5 +678,7 @@ export class LookupServiceMock {
                 }
             }
         };
+
+        // "А-а,Б-б,В-в,Г-г,Ғ-ғ,Д-д,Е-е,Ё-ё,Ж-ж,З-з,И-и,Ӣ-ӣ,Й-й,К-к,Қ-қ,Л-л,М-м,Н-н,О-о,П-п,Р-р,С-с,Т-т,У-у,Ӯ-ӯ,Ф-ф,Х-х,Ҳ-ҳ,Ч-ч,Ҷ-ҷ,Ш-ш,Ъ-ъ,Э-э,Ю-ю,Я-я"
     }
 }

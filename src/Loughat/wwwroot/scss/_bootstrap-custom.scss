@@ -1,3 +1,10 @@
+/*
+ * Taken from https://github.com/jtangelder/sass-loader
+ * Library authors usually provide a variable to modify the asset path. 
+ * bootstrap-sass for example has an $icon-font-path. Check out this working bootstrap example.
+ */
+$icon-font-path: "../lib/bootstrap-sass/assets/fonts/bootstrap/";
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

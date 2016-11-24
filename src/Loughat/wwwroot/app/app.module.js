@@ -1,4 +1,15 @@
-﻿import angular from 'angular';
+﻿/**
+ * jQuery dependencies
+ */
+import 'jQuery';
+import './../../../../../VirtualKeyboard/dist/virtkeys';
+import './../lib/virtkeys/dist/layouts/FA_IR';
+import './../lib/virtkeys/dist/layouts/TG';
+
+/**
+ * AngularJs and application dependencies
+ */
+import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 // import { visualizer } from "ui-router-visualizer";
 import { AppComponent } from './app.component';
@@ -6,7 +17,11 @@ import { ComponentsModule } from './components/components.module';
 import { CommonModule } from './common/common.module';
 import { MockModule } from './mock/mock.module';
 import { FiltersModule } from './common/filters/filters.module';
-// import './app.scss';
+
+/**
+ * Stylesheets
+ */
+import './app.scss';
 
 export const AppModule = angular
     .module('app', [
