@@ -33,4 +33,6 @@ export class VirtkeysDirective {
             kb.switchLayout(langMap[lang]);
         });
     }
+
+    //TODO: add destroy and close button
 }

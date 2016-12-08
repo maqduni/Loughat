@@ -8,9 +8,12 @@
 //TODO: Look at strip-loader
 
 // TODO: Create local namspaces for scss files
+// http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/
+
 // TODO: Copy assets to dedicated folders, not dump them all in public
 
 var webpack = require('webpack'),
+  path = require('path'),
   // Plugins
   ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -22,8 +25,7 @@ module.exports = {
       'angular-ui-router',
       'angular-sanitize',
       'angular-mocks'
-    ],
-    // css: './wwwroot/app/app.scss'
+    ]
   },
   output: {
     path: './wwwroot/public',
@@ -44,11 +46,15 @@ module.exports = {
       { test: /[\/]angular\.js$/, loader: 'exports?angular' },
       { test: /[\/]jquery\.js$/, loader: 'expose?$!expose?jQuery' },
       { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') },
-      { test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/, loader: 'file' },
-      { test: /\.gif?$|\.png?$|\.jpg?$/, loader: 'file' },
+      { test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/, loader: 'file?name=assets/[name].[ext]?[hash]' },
+      { test: /\.gif?$|\.png?$|\.jpg?$/, loader: 'file?name=assets/[name].[ext]?[hash]' },
     ]
   },
   resolve: {
+    root: path.resolve('./wwwroot'),
+    alias: {
+        '~': path.resolve('./wwwroot')
+    },
     extensions: ['', '.js'],
     modulesDirectories: ['./wwwroot/lib']
   },

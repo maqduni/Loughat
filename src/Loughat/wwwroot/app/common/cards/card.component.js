@@ -7,7 +7,7 @@ export const CardComponent = {
     },
     controller: class CardController {
         constructor(lookupService) {
-            this.lookupService = lookupService;
+            this._lookupService = lookupService;
         }
 
         $onInit() {

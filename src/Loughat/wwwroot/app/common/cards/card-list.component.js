@@ -5,7 +5,7 @@ export const CardListComponent = {
     // },
     controller: class CardListController {
         constructor(cardService) {
-            this.cardService = cardService;
+            this._cardService = cardService;
         }
 
         $onInit() {
@@ -14,7 +14,7 @@ export const CardListComponent = {
         }
 
         search() {
-            this.cardService.search(this.term).then((data) => {
+            this._cardService.search(this.term).then((data) => {
                 // console.log(data);
                 this.cards = [data[2]];
             });

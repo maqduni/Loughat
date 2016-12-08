@@ -1,29 +1,29 @@
 export class AuthService {
     constructor(appConfigService, $http, $q) {
-        this.appConfigService = appConfigService;
-        this.$http = $http;
-        this.$q = $q;
+        this._appConfigService = appConfigService;
+        this._$http = $http;
+        this._$q = $q;
     }
 
     isAuthenticated() {
-        return !!this.appConfigService.authToken;
+        return !!this._appConfigService.authToken;
     }
 
     authenticate(username, password) {
         //TODO: Review how apiUrl is being passed on, probably string interpolation is also not the best option, could be a constant
 
-        return this.$q((resolve, reject) => {
-            this.$http.post(`/api/account/login`, {
+        return this._$q((resolve, reject) => {
+            this._$http.post(`/api/account/login`, {
                 username: username,
                 password: password
             }).then((result) => {
-                this.appConfigService.authToken = result.data;
-                this.appConfigService.save();
+                this._appConfigService.authToken = result.data;
+                this._appConfigService.save();
 
                 resolve(result);
             }, (error) => {
-                this.appConfigService.authToken = undefined;
-                this.appConfigService.save();
+                this._appConfigService.authToken = undefined;
+                this._appConfigService.save();
 
                 reject(error);
             });
@@ -31,10 +31,10 @@ export class AuthService {
     }
 
     logout() {
-        return this.$q((resolve, reject) => {
-            this.$http.post(`/api/account/logout`, null).then((result) => {
-                this.appConfigService.authToken = undefined;
-                this.appConfigService.save();
+        return this._$q((resolve, reject) => {
+            this._$http.post(`/api/account/logout`, null).then((result) => {
+                this._appConfigService.authToken = undefined;
+                this._appConfigService.save();
 
                 resolve(result.data);
             }, (error) => {
@@ -44,8 +44,8 @@ export class AuthService {
     }
 
     test() {
-        return this.$q((resolve, reject) => {
-            this.$http.post(`/api/account/test`, null).then((result) => {
+        return this._$q((resolve, reject) => {
+            this._$http.post(`/api/account/test`, null).then((result) => {
                 console.log(result.data);
                 resolve(result.data);
             }, (error) => {

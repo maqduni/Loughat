@@ -2,15 +2,15 @@ import angular from 'angular';
 
 export class LookupService {
     constructor(appConfigService, $http, $q) {
-        this.appConfig = appConfigService;
-        this.$http = $http;
-        this.$q = $q;
+        this._appConfig = appConfigService;
+        this._$http = $http;
+        this._$q = $q;
     }
 
     abbreviations(returnData) {
         let data = [], 
-            promise = this.$q((resolve, reject) => {
-                this.$http.get(`/api/lookup/abbreviations`, {cache: true}).then((result) => {
+            promise = this._$q((resolve, reject) => {
+                this._$http.get(`/api/lookup/abbreviations`, {cache: true}).then((result) => {
                     resolve(result.data);
                     if (returnData) angular.copy(result.data, data);
                 }, (error) => {
@@ -23,8 +23,8 @@ export class LookupService {
 
     languageAbbreviations(returnData) {
         let data = [], 
-            promise = this.$q((resolve, reject) => {
-                this.$http.get(`/api/lookup/language-abbreviations`, {cache: true}).then((result) => {
+            promise = this._$q((resolve, reject) => {
+                this._$http.get(`/api/lookup/language-abbreviations`, {cache: true}).then((result) => {
                     resolve(result.data);
                     if (returnData) angular.copy(result.data, data);
                 }, (error) => {
@@ -37,8 +37,8 @@ export class LookupService {
 
     alphabet(returnData) {
         let data = [], 
-            promise = this.$q((resolve, reject) => {
-                this.$http.get(`/api/lookup/alphabet`, {cache: true}).then((result) => {
+            promise = this._$q((resolve, reject) => {
+                this._$http.get(`/api/lookup/alphabet`, {cache: true}).then((result) => {
                     resolve(result.data);
                     if (returnData) angular.copy(result.data, data);
                 }, (error) => {

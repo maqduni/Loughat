@@ -10,7 +10,10 @@
     "jquery": "^3.1.1",
     "bootstrap-sass": "^3.3.7",
     "angular-sanitize": "^1.5.8",
-    "virtkeys": "^0.8.12"
+    "virtkeys": "^0.8.13",
+    "jquery.browser": "^0.1.0",
+    "jwysiwyg": "^0.97.2",
+    "xregexp": "^3.1.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.8"

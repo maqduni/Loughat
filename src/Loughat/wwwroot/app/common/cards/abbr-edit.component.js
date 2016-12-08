@@ -5,9 +5,9 @@ export const AbbrEditComponent = {
     },
     controller: class AbbrEditController {
         constructor($element, $attrs, lookupService, $filter) {
-            this.$element = $element;
-            this.lookupService = lookupService;
-            this.$filter = $filter;
+            this._$element = $element;
+            this._lookupService = lookupService;
+            this._$filter = $filter;
 
             // TODO: Configure eslint to ignore Reflect
             this.isLang = Reflect.ownKeys($attrs).indexOf('isLang') > -1;
@@ -16,12 +16,12 @@ export const AbbrEditComponent = {
 
         $onInit() {
             this.abbreviations = this.isLang 
-                ? this.lookupService.languageAbbreviations(true)
-                : this.lookupService.abbreviations(true);
+                ? this._lookupService.languageAbbreviations(true)
+                : this._lookupService.abbreviations(true);
 
             this.ngModel.$formatters.push((modelValue) => {
                 if (modelValue)
-                    return this.$filter('htmlToPlainText')(modelValue);
+                    return this._$filter('htmlToPlainText')(modelValue);
 
                 return null;
             });
@@ -40,6 +40,8 @@ export const AbbrEditComponent = {
         
         updateViewValue() {
             this.ngModel.$setViewValue(this.shortValue);
+
+            // console.log(this._lookupService.abbreviations(true));
         }
 
         $postLink() {

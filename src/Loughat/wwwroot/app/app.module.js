@@ -1,10 +1,13 @@
 ﻿/**
  * jQuery dependencies
  */
-import 'jQuery';
-import './../../../../../VirtualKeyboard/dist/virtkeys';
-import './../lib/virtkeys/dist/layouts/FA_IR';
-import './../lib/virtkeys/dist/layouts/TG';
+import 'jquery';
+import 'jquery.browser'
+// import './../../../../../VirtualKeyboard/dist/virtkeys';
+import 'virtkeys';
+import 'virtkeys/dist/layouts/FA_IR';
+import 'virtkeys/dist/layouts/TG';
+import 'jwysiwyg/jquery.wysiwyg';
 
 /**
  * AngularJs and application dependencies
@@ -17,11 +20,6 @@ import { ComponentsModule } from './components/components.module';
 import { CommonModule } from './common/common.module';
 import { MockModule } from './mock/mock.module';
 import { FiltersModule } from './common/filters/filters.module';
-
-/**
- * Stylesheets
- */
-import './app.scss';
 
 export const AppModule = angular
     .module('app', [

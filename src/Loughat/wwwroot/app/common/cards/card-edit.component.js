@@ -10,13 +10,13 @@ export const CardEditComponent = {
     },
     controller: class CardEditComponent {
         constructor(lookupService) {
-            this.lookupService = lookupService;
+            this._lookupService = lookupService;
         }
 
         $onInit() {
             this.types = CardType;
-            this.languageAbbreviations = this.lookupService.languageAbbreviations(true);
-            this.alphabet = this.lookupService.alphabet(true);
+            this.languageAbbreviations = this._lookupService.languageAbbreviations(true);
+            this.alphabet = this._lookupService.alphabet(true);
 
             this.current = angular.copy(this.card);
         }

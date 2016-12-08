@@ -1,6 +1,7 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import 'angular-sanitize';
+import register from '~/app/utils/register';
 
 import { CardComponent } from './card.component';
 import { CardEditComponent } from './card-edit.component';
@@ -11,6 +12,7 @@ import { AbbrEditComponent } from './abbr-edit.component';
 import { LookupService } from './lookup.service';
 
 import { VirtkeysDirective } from './virtkeys.directive';
+import { JwysiwygDirective } from './jwysiwyg.directive';
 
 export const CardsModule = angular
     .module('app.cards', [
@@ -24,10 +26,6 @@ export const CardsModule = angular
     .component('abbrEdit', AbbrEditComponent)
     .service('cardService', CardService)
     .service('lookupService', LookupService)
-    
-    // Read this post. http://stackoverflow.com/questions/28620479/using-es6-classes-as-angular-1-x-directives
-    //http://www.michaelbromley.co.uk/blog/350/exploring-es6-classes-in-angularjs-1-x#_section-factories
-    .directive('virtkeys', () => new VirtkeysDirective())
     .config(($stateProvider) => {
         'ngInject';
 
@@ -45,3 +43,9 @@ export const CardsModule = angular
         });
     })
     .name;
+
+register(CardsModule)
+    // Read this post. http://stackoverflow.com/questions/28620479/using-es6-classes-as-angular-1-x-directives
+    // http://www.michaelbromley.co.uk/blog/350/exploring-es6-classes-in-angularjs-1-x#_section-factories
+    .directive('virtkeys', VirtkeysDirective)
+    .directive('jwysiwyg', JwysiwygDirective);

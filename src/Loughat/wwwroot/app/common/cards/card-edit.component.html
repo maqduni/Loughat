@@ -38,7 +38,8 @@
             <label for="">Definitions</label>
             <div ng-repeat="def in $ctrl.current.Definitions">
                 <span ng-show="$ctrl.current.Definitions.length > 1">{{$index}}</span>
-                <textarea ng-model="def.Tj" lang="tj"></textarea>
+                <textarea ng-model="def.Tj" lang="tj" jwysiwyg virtkeys></textarea>
+                <pre>{{def.Tj}}</pre>
             </div>
         </div>
         <div>
