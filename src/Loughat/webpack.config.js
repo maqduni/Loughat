@@ -34,52 +34,61 @@ module.exports = {
   },
   output: {
     path: './wwwroot/public',
-    filename: 'bundle.js'
+    filename: '[name].bundle.js'
   },
   node: {
     __dirname: true
   },
   module: {
-    loaders: [
-      { test: /.js$/, loader: 'ng-annotate' },
+    rules: [
+      { test: /.js$/, use: 'ng-annotate-loader' },
       {
         test: /.js$/,
         exclude: /(node_modules|lib)/,
-        loader: 'babel',
-        query: {
-          cacheDirectory: true, 
-          presets: ['es2015']
+        use: {
+          loader: 'babel-loader',
+          query: {
+            cacheDirectory: true,
+            presets: ['es2015']
+          }
         }
       },
-      { test: /[\/]angular\.js$/, loader: 'exports?angular' },
-      { test: /[\/]jquery\.js$/, loader: 'expose?$!expose?jQuery' },
-      
-      { test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/, loader: 'url-loader?limit=10000&name=assets/[name].[ext]?[hash]' },
-      { test: /\.gif?$|\.png?$|\.jpg?$/, loader: 'url-loader?limit=10000&name=assets/[name].[ext]?[hash]' },
-      
+      { test: /[\/]angular\.js$/, use: 'exports-loader?angular' },
+      { test: /[\/]jquery\.js$/, use: 'expose-loader?$!expose?jQuery' },
+
+      { test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/, use: 'url-loader?limit=10000&name=assets/[name].[ext]?[hash]' },
+      { test: /\.gif?$|\.png?$|\.jpg?$/, use: 'url-loader?limit=10000&name=assets/[name].[ext]?[hash]' },
+
       // 'css?modules!resolve-url!sass?includePaths[]=' + path.resolve(__dirname, 'node_modules', 'wwwroot/lib')
-      // { test: /\.css$/, loader: 'raw' },
-      // { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') },
+      // { test: /\.css$/, use: 'raw' },
+      // { test: /\.scss$/, use: ExtractTextPlugin.extract('css!sass') },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass')
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'sass-loader']
+        })
       },
     ]
   },
   resolve: {
-    root: path.resolve('./wwwroot'),
     alias: {
-        '~': path.resolve('./wwwroot')
+      '~': path.resolve('./wwwroot')
     },
-    extensions: ['', '.js'],
-    modulesDirectories: ['./wwwroot/lib']
+    extensions: ['.js'],
+    modules: [
+      './wwwroot',
+      './wwwroot/lib',
+    ],
+    descriptionFiles: ['package.json', 'bower.json'],
+    mainFields: ['module', 'main']
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'vendor', /* filename= */'vendor.bundle.js'),
-    new webpack.ResolverPlugin(
-      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
-    ),
-    new ExtractTextPlugin('app.css', {
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      fileName: 'vendor.bundle.js'
+    }),
+    new ExtractTextPlugin({
+      filename: 'app.css',
       allChunks: true
     })
   ]
