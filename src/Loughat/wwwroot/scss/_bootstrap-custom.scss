@@ -1,5 +1,6 @@
 /*
  * Taken from https://github.com/jtangelder/sass-loader
+ * Add the missing url rewriting using the resolve-url-loader. Place it directly after the sass-loader in the loader chain.
  * Library authors usually provide a variable to modify the asset path. 
  * bootstrap-sass for example has an $icon-font-path. Check out this working bootstrap example.
  */

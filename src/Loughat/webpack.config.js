@@ -4,13 +4,11 @@
 //http://michalzalecki.com/lazy-load-angularjs-with-webpack/
 //https://www.jonathan-petitcolas.com/2015/05/15/howto-setup-webpack-on-es6-react-application-with-sass.html
 
-//TODO: Look at webpack-dev-server
-//TODO: Look at strip-loader
-
-// TODO: Create local namspaces for scss files
-// http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/
-
+// TODO: Look at webpack-dev-server
+// TODO: Look at strip-loader
+// TODO: Create local namspaces for scss files http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/
 // TODO: Copy assets to dedicated folders, not dump them all in public
+// TODO: Reconfigure the setup for webpack2 http://javascriptplayground.com/blog/2016/10/moving-to-webpack-2/
 
 var webpack = require('webpack'),
   path = require('path'),
@@ -24,12 +22,22 @@ module.exports = {
       'angular',
       'angular-ui-router',
       'angular-sanitize',
-      'angular-mocks'
+      'angular-mocks',
+
+      'jquery',
+      'jquery.browser',
+      'virtkeys',
+      'virtkeys/dist/layouts/FA_IR',
+      'virtkeys/dist/layouts/TG',
+      'jwysiwyg/jquery.wysiwyg'
     ]
   },
   output: {
     path: './wwwroot/public',
     filename: 'bundle.js'
+  },
+  node: {
+    __dirname: true
   },
   module: {
     loaders: [
@@ -45,9 +53,17 @@ module.exports = {
       },
       { test: /[\/]angular\.js$/, loader: 'exports?angular' },
       { test: /[\/]jquery\.js$/, loader: 'expose?$!expose?jQuery' },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') },
-      { test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/, loader: 'file?name=assets/[name].[ext]?[hash]' },
-      { test: /\.gif?$|\.png?$|\.jpg?$/, loader: 'file?name=assets/[name].[ext]?[hash]' },
+      
+      { test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/, loader: 'url-loader?limit=10000&name=assets/[name].[ext]?[hash]' },
+      { test: /\.gif?$|\.png?$|\.jpg?$/, loader: 'url-loader?limit=10000&name=assets/[name].[ext]?[hash]' },
+      
+      // 'css?modules!resolve-url!sass?includePaths[]=' + path.resolve(__dirname, 'node_modules', 'wwwroot/lib')
+      // { test: /\.css$/, loader: 'raw' },
+      // { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('css!sass')
+      },
     ]
   },
   resolve: {

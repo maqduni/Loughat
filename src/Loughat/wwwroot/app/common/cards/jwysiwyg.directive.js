@@ -28,7 +28,6 @@ export class JwysiwygDirective {
             };
         
         //кит. омтар, умумитар, фарогиртар; адш. аам аз он ки... сарфи назар аз он ки..., бо вуҷуди он ки..., новобаста ба он ва ғ.
-
         this._lookupService.abbreviations().then((data) => {
             // console.log(data);
             var regexStr = `(?:^|[\\s\\n\\r\\t\.,\'"+!?-]+)(${
@@ -45,6 +44,9 @@ export class JwysiwygDirective {
             jqElement.wysiwyg('setContent', ngModel.$modelValue);
         };
 
+        /**
+         * Initialize component
+         */
         jqElement.wysiwyg({
             autoSave: true,
             rmUnusedControls: true,
@@ -121,7 +123,12 @@ export class JwysiwygDirective {
                 }
             }
         });
-    }
 
-    //TODO: add destroy
+        /**
+         * Destroy component
+         */
+        element.on('$destroy', function() {
+            jqElement.destroy();
+        });
+    }
 }
