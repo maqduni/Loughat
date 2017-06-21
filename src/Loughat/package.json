@@ -5,8 +5,8 @@
   "scripts": {
     "ws": "http-server 'wwwroot' -o",
     "scss": "node-sass 'wwwroot/app/common/cards/virtkeys.directive.scss' 'wwwroot/public/app.css' --importer node_modules/node-sass-css-importer/index.js",
-    "wp-dev": "webpack -d --progress --colors",
-    "wp-dev:w": "webpack -d --progress --colors --watch"
+    "dev": "webpack -d --progress --colors",
+    "dev:w": "webpack -d --progress --colors --watch"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",

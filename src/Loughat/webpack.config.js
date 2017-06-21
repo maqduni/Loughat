@@ -13,7 +13,9 @@
 var webpack = require('webpack'),
   path = require('path'),
   // Plugins
-  ExtractTextPlugin = require('extract-text-webpack-plugin');
+  ExtractTextPlugin = require('extract-text-webpack-plugin'),
+  // Importers
+  CssImporter = require('node-sass-css-importer');
 
 module.exports = {
   entry: {
@@ -42,8 +44,7 @@ module.exports = {
   module: {
     rules: [
       { test: /.js$/, use: 'ng-annotate-loader' },
-      {
-        test: /.js$/,
+      { test: /.js$/,
         exclude: /(node_modules|lib)/,
         use: {
           loader: 'babel-loader',
@@ -54,18 +55,29 @@ module.exports = {
         }
       },
       { test: /[\/]angular\.js$/, use: 'exports-loader?angular' },
-      { test: /[\/]jquery\.js$/, use: 'expose-loader?$!expose?jQuery' },
-
+      { test: /[\/]jquery\.js$/,
+        use: [
+          { loader: 'expose-loader', query: 'jQuery' },
+          { loader: 'expose-loader', query: '$' }
+        ]
+      },
       { test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/, use: 'url-loader?limit=10000&name=assets/[name].[ext]?[hash]' },
       { test: /\.gif?$|\.png?$|\.jpg?$/, use: 'url-loader?limit=10000&name=assets/[name].[ext]?[hash]' },
 
       // 'css?modules!resolve-url!sass?includePaths[]=' + path.resolve(__dirname, 'node_modules', 'wwwroot/lib')
       // { test: /\.css$/, use: 'raw' },
       // { test: /\.scss$/, use: ExtractTextPlugin.extract('css!sass') },
-      {
-        test: /\.scss$/,
+      { test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'sass-loader']
+          use: [
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                // importer: './node_modules/node-sass-css-importer/index.js'
+              }
+            }
+          ]
         })
       },
     ]
