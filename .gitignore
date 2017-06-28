@@ -31,6 +31,7 @@ bld/
 src/Loughat/wwwroot/lib/
 src/Loughat/wwwroot/public/
 .vscode/
+.vs/
 *.css
 
 # MSTest test Results
