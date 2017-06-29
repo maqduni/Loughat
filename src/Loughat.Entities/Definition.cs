@@ -8,26 +8,40 @@ namespace Loughat.Entities
 {
     public class Definition
     {
-        public string Tj { get; set; }
-        public string Fa { get; set; }
+        public List<string> Tj { get; set; } = new List<string>();
+        public List<string> Fa { get; set; } = new List<string>();
 
         public Definition()
         {
 
         }
 
-        public Definition(LanguageCode languageCode, string definition)
+        public Definition(LanguageCode languageCode, IEnumerable<string> meanings)
         {
+            var nonEmptyMeanings = meanings.Where(m => !string.IsNullOrWhiteSpace(m));
+            if (nonEmptyMeanings.Count() == 0)
+            {
+                throw new ArgumentException("List of meaninigs must contain at least 1 non-empty value.");
+            }
+
             switch (languageCode)
             {
                 case LanguageCode.Tj:
-                    Tj = definition;
+                    Tj.AddRange(meanings);
                     break;
                 case LanguageCode.Fa:
-                    Fa = definition;
+                    Fa.AddRange(meanings);
                     break;
                 default:
                     break;
+            }
+        }
+
+        public Definition(LanguageCode languageCode, string meaning) : this(languageCode, new string[] { meaning })
+        {
+            if (string.IsNullOrWhiteSpace(meaning))
+            {
+                throw new ArgumentException("Meaninig must not be null or empty.");
             }
         }
     }

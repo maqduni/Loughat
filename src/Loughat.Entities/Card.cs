@@ -13,7 +13,27 @@ namespace Loughat.Entities
         /// Unique id representing the object
         /// </summary>
         public string Id { get; set; }
-        
+
+        /// <summary>
+        /// Reference to the dictioanry object
+        /// </summary>
+        public DenormalizedReference Dictionary { get; set; }
+
+        /// <summary>
+        /// The letter, word or phrase
+        /// </summary>
+        public Definition Word { get; set; }
+
+        /// <summary>
+        /// Abbreviation of the origin of the word
+        /// </summary>
+        public Definition Origin { get; set; }
+
+        /// <summary>
+        /// Word definition with the list of word meanings
+        /// </summary>
+        public Definition Definition { get; set; }
+
         /// <summary>
         /// The first letter of the word
         /// </summary>
@@ -25,29 +45,9 @@ namespace Loughat.Entities
         public int[] Pages { get; set; }
         
         /// <summary>
-        /// Reference to the dictioanry object
-        /// </summary>
-        public DenormalizedReference Dictionary { get; set; }
-
-        /// <summary>
         /// Type of lexical structure: letter, word, phrase, prefix, or suffix
         /// </summary>
         public CardType Type { get; set; }
-
-        /// <summary>
-        /// The letter, word or phrase
-        /// </summary>
-        public Definition Word { get; set; }
-
-        /// <summary>
-        /// Abbreviation of the origin of the word
-        /// </summary>
-        public Definition Origin { get; set; }
-        
-        /// <summary>
-        /// List of word definitions
-        /// </summary>
-        public List<Definition> Definitions { get; set; }
 
         /// <summary>
         /// List of verses where the word is used

@@ -16,7 +16,7 @@ namespace Loughat.Tests
         {
         }
 
-        [Theory]
+        [Fact]
         public void GenerateAbbreviations()
         {
             // TODO: Figure out how to document the tajik text
@@ -130,7 +130,7 @@ namespace Loughat.Tests
             var serializedDict = JsonConvert.SerializeObject(abbreviations);
         }
 
-        [Theory]
+        [Fact]
         public void GenerateAlphabet()
         {
             // TODO: Add pages 
@@ -180,7 +180,7 @@ namespace Loughat.Tests
             var serializedAbc = JsonConvert.SerializeObject(aplhabet);
         }
 
-        [Theory]
+        [Fact]
         public void LetterA()
         {
             var dictionary = new Dictionary()
@@ -205,16 +205,9 @@ namespace Loughat.Tests
                     Type = CardType.Letter,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition() {
-                        Tj = "А"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            // TODO: Not everything is italic in the definition of the letter, review!!!
-                            Tj = @"ҳарфи аввали алифбои ҳозираи тоҷикӣ; дар алифбои арабиасоси тоҷикӣ бо ҳарфҳои «алиф» (ا), «айн» (ع) ва дар охири як гурӯҳ калимаҳо бо «ҳои ҳавваз» (ه) ифода мешавад; ҳарфи «алиф» дар ҳисоби абҷад ба адади 1 баробар аст; ҳарфи «А» дар гурӯҳбандии синфҳои таълимӣ, табақабандии мавзӯъҳо ва <abbr>ғ.</abbr> ба ҷои шумораи якум ба кор меравад."
-                        }
-                    },
+                    Word = "А".ToTj(),
+                    // TODO: Not everything is italic in the definition of the letter, review!!!
+                    Definition = @"ҳарфи аввали алифбои ҳозираи тоҷикӣ; дар алифбои арабиасоси тоҷикӣ бо ҳарфҳои «алиф» (ا), «айн» (ع) ва дар охири як гурӯҳ калимаҳо бо «ҳои ҳавваз» (ه) ифода мешавад; ҳарфи «алиф» дар ҳисоби абҷад ба адади 1 баробар аст; ҳарфи «А» дар гурӯҳбандии синфҳои таълимӣ, табақабандии мавзӯъҳо ва <abbr>ғ.</abbr> ба ҷои шумораи якум ба кор меравад.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -222,16 +215,8 @@ namespace Loughat.Tests
                     Type = CardType.Suffix, // TODO: Verify whether ҳиссача is suffix
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "-А"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<i>ҳиссачаест, ки бо феъл омада, маънои</i> тааҷҷуб, таассуф, эҳсос, ҳаяҷон <i>ва гайраро ифода мекунад:</i> <b>чӣ гуфтед-а?, бахтро бинед-а!</b>"
-                        }
-                    },
+                    Word = "-А".ToTj(),
+                    Definition = @"<i>ҳиссачаест, ки бо феъл омада, маънои</i> тааҷҷуб, таассуф, эҳсос, ҳаяҷон <i>ва гайраро ифода мекунад:</i> <b>чӣ гуфтед-а?, бахтро бинед-а!</b>".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -239,21 +224,10 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition() // TODO: Consider replacing the definition with a Dictionary<Enum.Language, string>
-                    {
-                        Tj = "ААМ(М)",
-                        Fa = "اعم"
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>кит.</abbr> омтар, умумитар, фарогиртар; <b>аам аз он ки...</b> сарфи назар аз он ки..., бо вуҷуди он ки..., новобаста ба он"
-                        }
-                    },
+                    // TODO: Consider replacing the definition with a Dictionary<Enum.Language, string>
+                    Word = "ААМ(М)".ToTj().AddFa("اعم"),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = @"<abbr>кит.</abbr> омтар, умумитар, фарогиртар; <b>аам аз он ки...</b> сарфи назар аз он ки..., бо вуҷуди он ки..., новобаста ба он".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -261,21 +235,9 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБ",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>кит.</abbr> падар, волид."
-                        }
-                    },
+                    Word = "АБ".ToTj().AddFa(""),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = @"<abbr>кит.</abbr> падар, волид.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -283,21 +245,9 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАВАЙН",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>кит.</abbr>, <abbr>ҷ.</abbr> дугонаи аб; падару модар, волидайн."
-                        }
-                    },
+                    Word = "АБАВАЙН".ToTj().AddFa(""),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = @"<abbr>кит.</abbr>, <abbr>ҷ.</abbr> дугонаи аб; падару модар, волидайн.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -305,21 +255,9 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАВИЯТ",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>кит.</abbr> падарӣ, падарӣ кардан."
-                        }
-                    },
+                    Word = "АБАВИЯТ".ToTj().AddFa(""),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = @"<abbr>кит.</abbr> падарӣ, падарӣ кардан.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -327,21 +265,9 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАВИЯТ",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>кит.</abbr> падарӣ, падарӣ кардан."
-                        }
-                    },
+                    Word = "АБАВИЯТ".ToTj().AddFa(""),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = @"<abbr>кит.</abbr> падарӣ, падарӣ кардан.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -349,21 +275,10 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАВИ",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>кит.</abbr> <i>мансуб ба</i> <b>аб</b>." // TODO: Add links to other words 
-                        }
-                    },
+                    Word = "АБАВИ".ToTj().AddFa(""),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    // TODO: Add links to other words 
+                    Definition = @"<abbr>кит.</abbr> <i>мансуб ба</i> <b>аб</b>.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -371,21 +286,9 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАВОН",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>кит.</abbr> падару модар, волидайн."
-                        }
-                    },
+                    Word = "АБАВОН".ToTj().AddFa(""),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = @"<abbr>кит.</abbr> падару модар, волидайн.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -393,21 +296,9 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАД",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>кит.</abbr> ҳамешагӣ, ҷовидон, доимӣ: <b>умри абад; то абад</b> ҳамеша, доим; <b>ҳабси абад</b> ҳабси якумрӣ, ҳабси доимӣ."
-                        }
-                    },
+                    Word = "АБАД".ToTj().AddFa(""),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = @"<abbr>кит.</abbr> ҳамешагӣ, ҷовидон, доимӣ: <b>умри абад; то абад</b> ҳамеша, доим; <b>ҳабси абад</b> ҳабси якумрӣ, ҳабси доимӣ.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -415,21 +306,9 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАДА",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>ҷ.</abbr> <b>обид; абадаи авсон</b> бутпарастон."
-                        }
-                    },
+                    Word = "АБАДА".ToTj().AddFa(""),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = @"<abbr>ҷ.</abbr> <b>обид; абадаи авсон</b> бутпарастон.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -437,25 +316,12 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАДАН",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"ба таври ҳамешагӣ, ҷовидон."
-                        },
-                        new Definition()
-                        {
-                            Tj = @"ҳаргиз, ҳеҷ гоҳ, ҳеҷ вақт."
-                        }
-                    },
+                    Word = "АБАДАН".ToTj().AddFa(""),
+                    Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = new string[] {
+                        @"ба таври ҳамешагӣ, ҷовидон.",
+                        @"ҳаргиз, ҳеҷ гоҳ, ҳеҷ вақт."
+                    }.ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -463,17 +329,8 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАДЗИНДА",
-                        Fa = ""
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"ҷовидон, абадӣ, ҳамешазинда, ба таври ҳамешагй, фанонопазир."
-                        }
-                    },
+                    Word = "АБАДЗИНДА".ToTj().AddFa(""),
+                    Definition = @"ҷовидон, абадӣ, ҳамешазинда, ба таври ҳамешагй, фанонопазир.".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 },
                 new Card()
@@ -481,21 +338,9 @@ namespace Loughat.Tests
                     Type = CardType.Word,
                     Letter = 'А',
                     Pages = new int[] { 29 },
-                    Word = new Definition()
-                    {
-                        Tj = "АБАДАН",
-                        Fa = ""
-                    },
-                    Origin  = new Definition()
-                    {
-                        Tj = "<abbr lang=\"true\">a.</abbr>"
-                    },
-                    Definitions = new List<Definition>() {
-                        new Definition()
-                        {
-                            Tj = @"<abbr>фалс.</abbr> ҷовидонӣ, пояндагӣ, фанонопазирӣ: <b>абадияти вақт, абадияти олам, абадияти ҳаракат.</b>"
-                        }
-                    },
+                    Word = "АБАДАН".ToTj().AddFa(""),
+                    Origin  = "<abbr lang=\"true\">a.</abbr>".ToTj(),
+                    Definition = @"<abbr>фалс.</abbr> ҷовидонӣ, пояндагӣ, фанонопазирӣ: <b>абадияти вақт, абадияти олам, абадияти ҳаракат.</b>".ToTj(),
                     Dictionary = dictionary.GetDenormalizedReference()
                 }
             };
