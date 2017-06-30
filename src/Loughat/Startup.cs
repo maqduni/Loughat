@@ -13,6 +13,8 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Loughat.Filters;
+using Raven.Client.Documents;
+using Loughat.Services;
 
 namespace Loughat
 {
@@ -62,7 +64,11 @@ namespace Loughat
                     Contact = new Contact() { Name = "Iskandar Rafiev", Email = "irafiev@gmail.com" }
                 });
                 options.IncludeXmlComments(xmlPath);
+                options.DescribeAllEnumsAsStrings();
             });
+
+            // RavenDB services
+            services.AddSingleton(Store.Documents);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

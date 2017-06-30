@@ -44,5 +44,14 @@ namespace Loughat.Entities
                 throw new ArgumentException("Meaninig must not be null or empty.");
             }
         }
+
+        /// <summary>
+        /// Serializes the contents of the definition instance
+        /// NOTE: Cannot be used in RavenDB index creation tasks
+        /// </summary>
+        override public string ToString()
+        {
+            return string.Join("|", Fa.Concat(Tj));
+        }
     }
 }

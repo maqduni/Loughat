@@ -9,7 +9,7 @@ namespace Loughat.Entities
     public class Dictionary: IEntity
     {
         public string Id { get; set; }
-        public string Name { get; set; }
+        public Definition Name { get; set; }
 
         // TODO: Create Author entity
         public List<string> Authors { get; set; }

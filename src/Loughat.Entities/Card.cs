@@ -37,7 +37,7 @@ namespace Loughat.Entities
         /// <summary>
         /// The first letter of the word
         /// </summary>
-        public char Letter { get; set; }
+        public Definition Letter { get; set; }
         
         /// <summary>
         /// The number of the page(s) of the dictionary the letter, word, or phrase appears on

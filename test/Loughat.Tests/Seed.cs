@@ -139,41 +139,41 @@ namespace Loughat.Tests
             {
                 Letters = new Dictionary<string, Definition>()
                 {
-                    { "А", new Definition(LanguageCode.Tj, "а") },
-                    { "Б", new Definition(LanguageCode.Tj, "бе") },
-                    { "В", new Definition(LanguageCode.Tj, "ве") },
-                    { "Г", new Definition(LanguageCode.Tj, "ге") },
-                    { "Ғ", new Definition(LanguageCode.Tj, "ғe") },
-                    { "Д", new Definition(LanguageCode.Tj, "де") },
-                    { "Е", new Definition(LanguageCode.Tj, "йе") },
-                    { "Ё", new Definition(LanguageCode.Tj, "йо") },
-                    { "Ж", new Definition(LanguageCode.Tj, "же") },
-                    { "З", new Definition(LanguageCode.Tj, "зе") },
-                    { "И", new Definition(LanguageCode.Tj, "и") },
-                    { "Ӣ", new Definition(LanguageCode.Tj, "ӣ") },
-                    { "Й", new Definition(LanguageCode.Tj, "ий") },
-                    { "К", new Definition(LanguageCode.Tj, "ке") },
-                    { "Қ", new Definition(LanguageCode.Tj, "қе") },
-                    { "Л", new Definition(LanguageCode.Tj, "ле") },
-                    { "М", new Definition(LanguageCode.Tj, "ме") },
-                    { "Н", new Definition(LanguageCode.Tj, "не") },
-                    { "О", new Definition(LanguageCode.Tj, "о") },
-                    { "П", new Definition(LanguageCode.Tj, "пе") },
-                    { "Р", new Definition(LanguageCode.Tj, "ре") },
-                    { "С", new Definition(LanguageCode.Tj, "се") },
-                    { "Т", new Definition(LanguageCode.Tj, "те") },
-                    { "У", new Definition(LanguageCode.Tj, "у") },
-                    { "Ӯ", new Definition(LanguageCode.Tj, "ӯ") },
-                    { "Ф", new Definition(LanguageCode.Tj, "фе") },
-                    { "Х", new Definition(LanguageCode.Tj, "хе") },
-                    { "Ҳ", new Definition(LanguageCode.Tj, "ҳe") },
-                    { "Ч", new Definition(LanguageCode.Tj, "че") },
-                    { "Ҷ", new Definition(LanguageCode.Tj, "ҷе") },
-                    { "Ш", new Definition(LanguageCode.Tj, "ше") },
-                    { "Ъ", new Definition(LanguageCode.Tj, "ъ") },
-                    { "Э", new Definition(LanguageCode.Tj, "э") },
-                    { "Ю", new Definition(LanguageCode.Tj, "йу") },
-                    { "Я", new Definition(LanguageCode.Tj, "йа") }
+                    { "А", "а".ToTj() },
+                    { "Б", "бе".ToTj() },
+                    { "В", "ве".ToTj() },
+                    { "Г", "ге".ToTj() },
+                    { "Ғ", "ғe".ToTj() },
+                    { "Д", "де".ToTj() },
+                    { "Е", "йе".ToTj() },
+                    { "Ё", "йо".ToTj() },
+                    { "Ж", "же".ToTj() },
+                    { "З", "зе".ToTj() },
+                    { "И", "и".ToTj() },
+                    { "Ӣ", "ӣ".ToTj() },
+                    { "Й", "ий".ToTj() },
+                    { "К", "ке".ToTj() },
+                    { "Қ", "қе".ToTj() },
+                    { "Л", "ле".ToTj() },
+                    { "М", "ме".ToTj() },
+                    { "Н", "не".ToTj() },
+                    { "О", "о".ToTj() },
+                    { "П", "пе".ToTj() },
+                    { "Р", "ре".ToTj() },
+                    { "С", "се".ToTj() },
+                    { "Т", "те".ToTj() },
+                    { "У", "у".ToTj() },
+                    { "Ӯ", "ӯ".ToTj() },
+                    { "Ф", "фе".ToTj() },
+                    { "Х", "хе".ToTj() },
+                    { "Ҳ", "ҳe".ToTj() },
+                    { "Ч", "че".ToTj() },
+                    { "Ҷ", "ҷе".ToTj() },
+                    { "Ш", "ше".ToTj() },
+                    { "Ъ", "ъ".ToTj() },
+                    { "Э", "э".ToTj() },
+                    { "Ю", "йу".ToTj() },
+                    { "Я", "йа".ToTj() }
                 }
             };
 
@@ -186,7 +186,7 @@ namespace Loughat.Tests
             var dictionary = new Dictionary()
             {
                 Id = $"Dictionaries/{Guid.NewGuid()}", // TODO: Use Raven conventions to generate the id for new objects
-                Name = "ФАРҲАНГИ ТАФСИРИИ ЗАБОНИ ТОҶИКӢ"
+                Name = "ФАРҲАНГИ ТАФСИРИИ ЗАБОНИ ТОҶИКӢ".ToTj()
             };
 
             /*
@@ -203,7 +203,7 @@ namespace Loughat.Tests
                 new Card() {
                     Id = $"Cards/{Guid.NewGuid()}", // TODO: Use Raven conventions to generate the id for new objects
                     Type = CardType.Letter,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "А".ToTj(),
                     // TODO: Not everything is italic in the definition of the letter, review!!!
@@ -213,7 +213,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Suffix, // TODO: Verify whether ҳиссача is suffix
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "-А".ToTj(),
                     Definition = @"<i>ҳиссачаест, ки бо феъл омада, маънои</i> тааҷҷуб, таассуф, эҳсос, ҳаяҷон <i>ва гайраро ифода мекунад:</i> <b>чӣ гуфтед-а?, бахтро бинед-а!</b>".ToTj(),
@@ -222,7 +222,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     // TODO: Consider replacing the definition with a Dictionary<Enum.Language, string>
                     Word = "ААМ(М)".ToTj().AddFa("اعم"),
@@ -233,7 +233,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБ".ToTj().AddFa(""),
                     Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
@@ -243,7 +243,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАВАЙН".ToTj().AddFa(""),
                     Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
@@ -253,7 +253,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАВИЯТ".ToTj().AddFa(""),
                     Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
@@ -263,7 +263,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАВИЯТ".ToTj().AddFa(""),
                     Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
@@ -273,7 +273,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАВИ".ToTj().AddFa(""),
                     Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
@@ -284,7 +284,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАВОН".ToTj().AddFa(""),
                     Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
@@ -294,7 +294,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАД".ToTj().AddFa(""),
                     Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
@@ -304,7 +304,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАДА".ToTj().AddFa(""),
                     Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
@@ -314,7 +314,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАДАН".ToTj().AddFa(""),
                     Origin = "<abbr lang=\"true\">a.</abbr>".ToTj(),
@@ -327,7 +327,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАДЗИНДА".ToTj().AddFa(""),
                     Definition = @"ҷовидон, абадӣ, ҳамешазинда, ба таври ҳамешагй, фанонопазир.".ToTj(),
@@ -336,7 +336,7 @@ namespace Loughat.Tests
                 new Card()
                 {
                     Type = CardType.Word,
-                    Letter = 'А',
+                    Letter = "А".ToTj(),
                     Pages = new int[] { 29 },
                     Word = "АБАДАН".ToTj().AddFa(""),
                     Origin  = "<abbr lang=\"true\">a.</abbr>".ToTj(),

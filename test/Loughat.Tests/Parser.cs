@@ -1,6 +1,7 @@
 ﻿using Loughat.Entities;
 using Loughat.Entities.Enums;
 using Loughat.Entities.Extensions;
+using Loughat.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace Loughat.Tests
         {
             var test = @"-39";
             var page_match = Regex.Match(test, @"\d+");
+
+            Store.ExecuteIndexCreationTasks();
         }
 
         [Fact]
@@ -39,8 +42,11 @@ namespace Loughat.Tests
             var filePath = @"Z:\Desktop\Farhang\Jild 1 Text\Pages\02x_03x.txt";
             var fileLines = File.ReadAllLines(filePath);
 
+            // TODO: There are examples of when origin abbreviations are used in pairs, ю.-лот.
+            // TODO: There are a lot of examples where кит. is written before the first meaning in definitions with multiple meanings
+            // TODO: Keep Origin? Or combine it with the preliminary descripption of the word?
 
-            // Setup regexp to parse the word line
+            // Setup regexp to parse the word line (test @http://regexr.com/)
             // - Word (tajik uppercase literals with dashes and parentheses)
             // - Definition number # (latin figure)
             // - Origin (a language abbreviation)
@@ -109,10 +115,10 @@ namespace Loughat.Tests
                 {
                     Word = match.Groups[1].Value.ToTj(),
                     Origin = match.Groups[2].Value.ToTj(),
-                    Definition = Regex.Split(match.Groups[4].Value, @"\d\.\s*")
+                    Definition = Regex.Split(match.Groups[4].Value, @"\d\s*\.\s*")
                     .ToArray().ToTj(),
                     
-                    Letter = page.Tab[0],
+                    Letter = page.Tab.Substring(0, 1).ToTj(),
                     Pages = new int[] { int.Parse(page.Page) },
                     Type = 
                     match.Groups[1].Value.StartsWith("-") ? CardType.Suffix : 
@@ -125,6 +131,14 @@ namespace Loughat.Tests
 
             var serializedPages = JsonConvert.SerializeObject(dict_Pages);
             var serializedWords = JsonConvert.SerializeObject(dict_Words);
+
+            using (var bulkInsert = Store.Documents.BulkInsert())
+            {
+                foreach (var card in dict_Words)
+                {
+                    bulkInsert.Store(card);
+                }
+            }
         }
     }
 }

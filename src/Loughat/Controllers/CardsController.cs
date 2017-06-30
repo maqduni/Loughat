@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Loughat.Entities;
 using Microsoft.Extensions.Logging;
+using Raven.Client.Documents;
+using Loughat.Entities.Enums;
+using Loughat.Services.Indexes;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,14 +21,17 @@ namespace Loughat.Controllers
     {
         // TODO: Should I go fully RESTful?
         private readonly ILogger<CardsController> _logger;
+        private readonly IDocumentStore _store;
 
         /// <summary>
         /// Controller constructor, receives and binds injected services
         /// </summary>
         /// <param name="logger"></param>
-        public CardsController(ILogger<CardsController> logger)
+        /// <param name="store"></param>
+        public CardsController(ILogger<CardsController> logger, IDocumentStore store)
         {
             _logger = logger;
+            _store = store;
         }
 
         /// <summary>
@@ -33,10 +39,45 @@ namespace Loughat.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Card> Get()
+        public IEnumerable<Card> Get(string query, string word, int page = 1, int page_size = 10)
         {
-            throw new NotImplementedException();
-            return null;
+            using (var session = _store.OpenAsyncSession())
+            {
+                var dbQuery = session.Advanced.AsyncDocumentQuery<Cards_Search.Result, Cards_Search>();
+
+                // Apply search terms
+                if (!string.IsNullOrWhiteSpace(query))
+                {
+                    //dbQuery.Search(x => x.Query, query);
+                    dbQuery.Search("Query", query, EscapeQueryOptions.RawQuery);
+                    dbQuery.SetHighlighterTags("<b>", "</b>");
+                }
+                else if (!string.IsNullOrWhiteSpace(word))
+                {
+                    // TODO: RavenDB allows to search by using such queries but you have to be aware that leading wildcards drastically slow down searches.
+                    // Consider if you really need to find substrings, most cases looking for words is enough.There are also other alternatives for 
+                    // searching without expensive wildcard matches, e.g.indexing a reversed version of text field or creating a custom analyzer.
+                    
+                    //dbQuery.Search(x => x.Word, word, escapeQueryOptions: EscapeQueryOptions.RawQuery);
+                    //dbQuery.Search("Word", word, EscapeQueryOptions.AllowAllWildcards);
+                    dbQuery.Where($"Word:*{word}*");
+                }
+                
+                // Don't return anything if no terms where specified
+                if (string.IsNullOrWhiteSpace(dbQuery.ToString()))
+                {
+                    return new List<Card>();
+                }
+
+                // Apply paging
+                dbQuery.Skip((page - 1) * page_size).Take(page_size);
+
+                var results = dbQuery.OfType<Card>().ToListAsync().Result;
+                return results;
+            }
+
+            //http://www.davejsaunders.com/2015/04/26/paging-in-restful-web-services.html
+            //The most common way to do this is with a custom HTTP response header(for example X-Total-Count).
         }
 
         /// <summary>

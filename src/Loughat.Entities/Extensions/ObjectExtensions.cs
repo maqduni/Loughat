@@ -12,7 +12,7 @@ namespace Loughat.Entities.Extensions
             return new DenormalizedReference()
             {
                 Id = dictionary.Id,
-                Name = dictionary.Name
+                Name = dictionary.Name.ToString()
             };
         }
     }
