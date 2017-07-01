@@ -43,23 +43,22 @@ namespace Loughat.Controllers
         {
             using (var session = _store.OpenAsyncSession())
             {
+                //var dbQuery = session.Query<Cards_Search.QueryProjection, Cards_Search>();
                 var dbQuery = session.Advanced.AsyncDocumentQuery<Cards_Search.Result, Cards_Search>();
 
                 // Apply search terms
                 if (!string.IsNullOrWhiteSpace(query))
                 {
-                    //dbQuery.Search(x => x.Query, query);
-                    dbQuery.Search("Query", query, EscapeQueryOptions.RawQuery);
-                    dbQuery.SetHighlighterTags("<b>", "</b>");
+                    //dbQuery.Search(x => x.Query, query, 1, SearchOptions.And, EscapeQueryOptions.RawQuery);
+                    dbQuery.Search("Query", query, EscapeQueryOptions.EscapeAll);
                 }
                 else if (!string.IsNullOrWhiteSpace(word))
                 {
                     // TODO: RavenDB allows to search by using such queries but you have to be aware that leading wildcards drastically slow down searches.
                     // Consider if you really need to find substrings, most cases looking for words is enough.There are also other alternatives for 
                     // searching without expensive wildcard matches, e.g.indexing a reversed version of text field or creating a custom analyzer.
-                    
-                    //dbQuery.Search(x => x.Word, word, escapeQueryOptions: EscapeQueryOptions.RawQuery);
-                    //dbQuery.Search("Word", word, EscapeQueryOptions.AllowAllWildcards);
+
+                    //dbQuery.Where(x => x.Word.Equals($"*{word}*"));
                     dbQuery.Where($"Word:*{word}*");
                 }
                 

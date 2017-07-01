@@ -9,7 +9,7 @@ using Loughat.Entities.Enums;
 
 namespace Loughat.Services.Indexes
 {
-    public class Cards_Search: AbstractIndexCreationTask<Card>
+    public class Cards_Search: AbstractIndexCreationTask<Card, Cards_Search.Result>
     {
         public static string Name() => typeof(Cards_Search).Name.Replace("_", "/");
 
@@ -20,6 +20,11 @@ namespace Loughat.Services.Indexes
             public CardType Type { get; set; }
             public int[] Pages { get; set; }
             public IEnumerable<string> Query { get; set; }
+        }
+
+        public class QueryProjection {
+            public string Word { get; set; }
+            public string Query { get; set; }
         }
 
         public Cards_Search()
@@ -40,10 +45,12 @@ namespace Loughat.Services.Indexes
                                Query = _wordList.Concat(_definitionList).Concat(_letterList)
                            };
 
-            Index("Word", FieldIndexing.Analyzed);
+            Index(x => x.Word, FieldIndexing.Analyzed);
+            //Suggestion(x => x.Word);
 
-            Index("Query", FieldIndexing.Analyzed);
-            TermVector("Query", FieldTermVector.WithPositionsAndOffsets);
+            Index(x => x.Query, FieldIndexing.Analyzed);
+            //Suggestion(x => x.Query);
+            TermVector(x => x.Query, FieldTermVector.WithPositionsAndOffsets);
             
         }
     }
